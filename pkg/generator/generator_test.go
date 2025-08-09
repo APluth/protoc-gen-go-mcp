@@ -25,7 +25,7 @@ import (
 	"testing"
 
 	. "github.com/onsi/gomega"
-	testdata "github.com/redpanda-data/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
+	testdata "github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 

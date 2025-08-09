@@ -1,4 +1,4 @@
-module github.com/redpanda-data/protoc-gen-go-mcp
+module github.com/APluth/protoc-gen-go-mcp
 
 go 1.23.5
 

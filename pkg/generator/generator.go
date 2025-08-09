@@ -64,7 +64,7 @@ import (
   "google.golang.org/protobuf/encoding/protojson"
   "connectrpc.com/connect"
   grpc "google.golang.org/grpc"
-  "github.com/redpanda-data/protoc-gen-go-mcp/pkg/runtime"
+  "github.com/APluth/protoc-gen-go-mcp/pkg/runtime"
 )
 
 
@@ -105,14 +105,6 @@ func Register{{$key}}Handler(s *mcpserver.MCPServer, srv {{$key}}Server, opts ..
     var req {{$tool_val.RequestType}}
 
     message := request.Params.Arguments
-
-    // Extract extra properties if configured
-    for _, prop := range config.ExtraProperties {
-      if propVal, ok := message[prop.Name]; ok {
-        ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-      }
-    }
-
     marshaled, err := json.Marshal(message)
     if err != nil {
       return nil, err
