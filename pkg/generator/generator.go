@@ -148,15 +148,6 @@ func Register{{$key}}HandlerOpenAI(s *mcpserver.MCPServer, srv {{$key}}Server, o
 
     message := request.Params.Arguments
 
-    // Extract extra properties if configured
-    for _, prop := range config.ExtraProperties {
-      if propVal, ok := message[prop.Name]; ok {
-        ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-      }
-    }
-
-    runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
     marshaled, err := json.Marshal(message)
     if err != nil {
       return nil, err
@@ -232,14 +223,6 @@ func ForwardToConnect{{$key}}Client(s *mcpserver.MCPServer, client Connect{{$key
     var req {{$tool_val.RequestType}}
 
     message := request.Params.Arguments
-
-    // Extract extra properties if configured
-    for _, prop := range config.ExtraProperties {
-      if propVal, ok := message[prop.Name]; ok {
-        ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-      }
-    }
-
     marshaled, err := json.Marshal(message)
     if err != nil {
       return nil, err
@@ -283,14 +266,6 @@ func ForwardTo{{$key}}Client(s *mcpserver.MCPServer, client {{$key}}Client, opts
     var req {{$tool_val.RequestType}}
 
     message := request.Params.Arguments
-
-    // Extract extra properties if configured
-    for _, prop := range config.ExtraProperties {
-      if propVal, ok := message[prop.Name]; ok {
-        ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-      }
-    }
-
     marshaled, err := json.Marshal(message)
     if err != nil {
       return nil, err
