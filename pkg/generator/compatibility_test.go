@@ -333,8 +333,6 @@ func TestCompatOpenAI(t *testing.T) {
 			// Then apply Fix for OpenAI compatibility mode (converts all OpenAI format back to protobuf format)
 			// This is what would happen in the actual MCP tool execution before protojson.Unmarshal
 			if rawData, ok := jsonData.(map[string]interface{}); ok {
-				runtime.FixOpenAI(tt.input.ProtoReflect().Descriptor(), rawData)
-
 				// Verify that the converted data can be unmarshaled into the proto message
 				fixedJSON, err := json.Marshal(rawData)
 				g.Expect(err).ToNot(HaveOccurred())

@@ -51,14 +51,6 @@ func RegisterTestServiceHandler(s *mcpserver.MCPServer, srv TestServiceServer, o
 		var req testdata.CreateItemRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -90,14 +82,6 @@ func RegisterTestServiceHandler(s *mcpserver.MCPServer, srv TestServiceServer, o
 		var req testdata.GetItemRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -129,14 +113,6 @@ func RegisterTestServiceHandler(s *mcpserver.MCPServer, srv TestServiceServer, o
 		var req testdata.ProcessWellKnownTypesRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -303,14 +279,6 @@ func ForwardToConnectTestServiceClient(s *mcpserver.MCPServer, client ConnectTes
 		var req testdata.CreateItemRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -341,14 +309,6 @@ func ForwardToConnectTestServiceClient(s *mcpserver.MCPServer, client ConnectTes
 		var req testdata.GetItemRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -379,14 +339,6 @@ func ForwardToConnectTestServiceClient(s *mcpserver.MCPServer, client ConnectTes
 		var req testdata.ProcessWellKnownTypesRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -425,14 +377,6 @@ func ForwardToTestServiceClient(s *mcpserver.MCPServer, client TestServiceClient
 		var req testdata.CreateItemRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -463,14 +407,6 @@ func ForwardToTestServiceClient(s *mcpserver.MCPServer, client TestServiceClient
 		var req testdata.GetItemRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -501,14 +437,6 @@ func ForwardToTestServiceClient(s *mcpserver.MCPServer, client TestServiceClient
 		var req testdata.ProcessWellKnownTypesRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err

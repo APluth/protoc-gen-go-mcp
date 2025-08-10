@@ -45,14 +45,6 @@ func RegisterByteStreamHandler(s *mcpserver.MCPServer, srv ByteStreamServer, opt
 		var req bytestream.QueryWriteStatusRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -153,14 +145,6 @@ func ForwardToConnectByteStreamClient(s *mcpserver.MCPServer, client ConnectByte
 		var req bytestream.QueryWriteStatusRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -199,14 +183,6 @@ func ForwardToByteStreamClient(s *mcpserver.MCPServer, client ByteStreamClient, 
 		var req bytestream.QueryWriteStatusRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err

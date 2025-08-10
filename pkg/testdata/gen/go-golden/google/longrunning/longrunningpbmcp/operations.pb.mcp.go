@@ -58,14 +58,6 @@ func RegisterOperationsHandler(s *mcpserver.MCPServer, srv OperationsServer, opt
 		var req longrunningpb.CancelOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -97,14 +89,6 @@ func RegisterOperationsHandler(s *mcpserver.MCPServer, srv OperationsServer, opt
 		var req longrunningpb.DeleteOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -136,14 +120,6 @@ func RegisterOperationsHandler(s *mcpserver.MCPServer, srv OperationsServer, opt
 		var req longrunningpb.GetOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -175,14 +151,6 @@ func RegisterOperationsHandler(s *mcpserver.MCPServer, srv OperationsServer, opt
 		var req longrunningpb.ListOperationsRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -214,14 +182,6 @@ func RegisterOperationsHandler(s *mcpserver.MCPServer, srv OperationsServer, opt
 		var req longrunningpb.WaitOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -454,14 +414,6 @@ func ForwardToConnectOperationsClient(s *mcpserver.MCPServer, client ConnectOper
 		var req longrunningpb.CancelOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -492,14 +444,6 @@ func ForwardToConnectOperationsClient(s *mcpserver.MCPServer, client ConnectOper
 		var req longrunningpb.DeleteOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -530,14 +474,6 @@ func ForwardToConnectOperationsClient(s *mcpserver.MCPServer, client ConnectOper
 		var req longrunningpb.GetOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -568,14 +504,6 @@ func ForwardToConnectOperationsClient(s *mcpserver.MCPServer, client ConnectOper
 		var req longrunningpb.ListOperationsRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -606,14 +534,6 @@ func ForwardToConnectOperationsClient(s *mcpserver.MCPServer, client ConnectOper
 		var req longrunningpb.WaitOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -652,14 +572,6 @@ func ForwardToOperationsClient(s *mcpserver.MCPServer, client OperationsClient, 
 		var req longrunningpb.CancelOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -690,14 +602,6 @@ func ForwardToOperationsClient(s *mcpserver.MCPServer, client OperationsClient, 
 		var req longrunningpb.DeleteOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -728,14 +632,6 @@ func ForwardToOperationsClient(s *mcpserver.MCPServer, client OperationsClient, 
 		var req longrunningpb.GetOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -766,14 +662,6 @@ func ForwardToOperationsClient(s *mcpserver.MCPServer, client OperationsClient, 
 		var req longrunningpb.ListOperationsRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -804,14 +692,6 @@ func ForwardToOperationsClient(s *mcpserver.MCPServer, client OperationsClient, 
 		var req longrunningpb.WaitOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
