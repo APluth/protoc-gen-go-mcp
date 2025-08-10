@@ -44,8 +44,6 @@ gen
 └── go
     └── testdata
         ├── test_service.pb.go
-        ├── testdataconnect/
-        │   └── test_service.connect.go
         └── testdatamcp/
             └── test_service.pb.mcp.go
 ```

@@ -15,8 +15,6 @@
 package runtime
 
 import (
-	"errors"
-
 	"github.com/mark3labs/mcp-go/mcp"
 	apierrors "github.com/redpanda-data/common-go/api/errors"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
@@ -25,7 +23,7 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
-// HandleError converts a gRPC/Connect error into a structured MCP tool result
+// HandleError converts a gRPC error into a structured MCP tool result
 // It extracts error codes, messages, and detailed error information using common-go utilities
 func HandleError(err error) (*mcp.CallToolResult, error) {
 	if err == nil {

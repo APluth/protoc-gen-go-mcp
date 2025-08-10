@@ -43,7 +43,6 @@ func main() {
 	fmt.Printf("Using OpenAI-compatible MCP handlers\n")
 	testdatamcp.RegisterTestServiceHandlerOpenAI(s, &srv)
 
-	testdatamcp.ForwardToConnectTestServiceClient(s, connectClient)
 	testdatamcp.ForwardToTestServiceClient(s, grpcClient)
 
 	if err := server.ServeStdio(s); err != nil {
