@@ -19,11 +19,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/APluth/protoc-gen-go-mcp/pkg/runtime"
+	testdata "github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
+	"github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata/testdataconnect"
+	"github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata/testdatamcp"
 	"github.com/mark3labs/mcp-go/server"
-	"github.com/redpanda-data/protoc-gen-go-mcp/pkg/runtime"
-	testdata "github.com/redpanda-data/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
-	"github.com/redpanda-data/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata/testdataconnect"
-	"github.com/redpanda-data/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata/testdatamcp"
 )
 
 // Ensure our interface and the official gRPC interface are grpcClient
