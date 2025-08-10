@@ -261,16 +261,6 @@ func RegisterOperationsHandlerOpenAI(s *mcpserver.MCPServer, srv OperationsServe
 		var req longrunningpb.CancelOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
-		runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -302,16 +292,6 @@ func RegisterOperationsHandlerOpenAI(s *mcpserver.MCPServer, srv OperationsServe
 		var req longrunningpb.DeleteOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
-		runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -343,16 +323,6 @@ func RegisterOperationsHandlerOpenAI(s *mcpserver.MCPServer, srv OperationsServe
 		var req longrunningpb.GetOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
-		runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -384,16 +354,6 @@ func RegisterOperationsHandlerOpenAI(s *mcpserver.MCPServer, srv OperationsServe
 		var req longrunningpb.ListOperationsRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
-		runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
@@ -425,16 +385,6 @@ func RegisterOperationsHandlerOpenAI(s *mcpserver.MCPServer, srv OperationsServe
 		var req longrunningpb.WaitOperationRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
-		runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err

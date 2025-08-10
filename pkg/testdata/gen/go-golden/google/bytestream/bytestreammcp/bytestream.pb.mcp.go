@@ -92,16 +92,6 @@ func RegisterByteStreamHandlerOpenAI(s *mcpserver.MCPServer, srv ByteStreamServe
 		var req bytestream.QueryWriteStatusRequest
 
 		message := request.Params.Arguments
-
-		// Extract extra properties if configured
-		for _, prop := range config.ExtraProperties {
-			if propVal, ok := message[prop.Name]; ok {
-				ctx = context.WithValue(ctx, prop.ContextKey, propVal)
-			}
-		}
-
-		runtime.FixOpenAI(req.ProtoReflect().Descriptor(), message)
-
 		marshaled, err := json.Marshal(message)
 		if err != nil {
 			return nil, err
