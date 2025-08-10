@@ -11,7 +11,6 @@ import (
 
 	"encoding/json"
 
-	"connectrpc.com/connect"
 	mcpserver "github.com/mark3labs/mcp-go/server"
 	"google.golang.org/protobuf/encoding/protojson"
 
@@ -122,49 +121,6 @@ func RegisterByteStreamHandlerWithProvider(s *mcpserver.MCPServer, srv ByteStrea
 // ByteStreamClient is compatible with the grpc-go client interface.
 type ByteStreamClient interface {
 	QueryWriteStatus(ctx context.Context, req *bytestream.QueryWriteStatusRequest, opts ...grpc.CallOption) (*bytestream.QueryWriteStatusResponse, error)
-}
-
-// ConnectByteStreamClient is compatible with the connectrpc-go client interface.
-type ConnectByteStreamClient interface {
-	QueryWriteStatus(ctx context.Context, req *connect.Request[bytestream.QueryWriteStatusRequest]) (*connect.Response[bytestream.QueryWriteStatusResponse], error)
-}
-
-// ForwardToConnectByteStreamClient registers a connectrpc client, to forward MCP calls to it.
-func ForwardToConnectByteStreamClient(s *mcpserver.MCPServer, client ConnectByteStreamClient, opts ...runtime.Option) {
-	config := runtime.NewConfig()
-	for _, opt := range opts {
-		opt(config)
-	}
-	QueryWriteStatusTool := ByteStream_QueryWriteStatusTool
-	// Add extra properties to schema if configured
-	if len(config.ExtraProperties) > 0 {
-		QueryWriteStatusTool = runtime.AddExtraPropertiesToTool(QueryWriteStatusTool, config.ExtraProperties)
-	}
-
-	s.AddTool(QueryWriteStatusTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-		var req bytestream.QueryWriteStatusRequest
-
-		message := request.Params.Arguments
-		marshaled, err := json.Marshal(message)
-		if err != nil {
-			return nil, err
-		}
-
-		if err := (protojson.UnmarshalOptions{DiscardUnknown: true}).Unmarshal(marshaled, &req); err != nil {
-			return nil, err
-		}
-
-		resp, err := client.QueryWriteStatus(ctx, connect.NewRequest(&req))
-		if err != nil {
-			return runtime.HandleError(err)
-		}
-
-		marshaled, err = (protojson.MarshalOptions{UseProtoNames: true, EmitDefaultValues: true}).Marshal(resp.Msg)
-		if err != nil {
-			return nil, err
-		}
-		return mcp.NewToolResultText(string(marshaled)), nil
-	})
 }
 
 // ForwardToByteStreamClient registers a gRPC client, to forward MCP calls to it.

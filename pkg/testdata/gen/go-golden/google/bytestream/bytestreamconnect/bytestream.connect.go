@@ -19,7 +19,6 @@
 package bytestreamconnect
 
 import (
-	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
 	bytestream "google.golang.org/genproto/googleapis/bytestream"

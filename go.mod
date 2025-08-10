@@ -3,7 +3,6 @@ module github.com/APluth/protoc-gen-go-mcp
 go 1.23.5
 
 require (
-	connectrpc.com/connect v1.18.1
 	github.com/mark3labs/mcp-go v0.37.0
 	github.com/onsi/gomega v1.37.0
 	github.com/openai/openai-go v1.5.0
@@ -17,6 +16,7 @@ require (
 
 require (
 	buf.build/gen/go/redpandadata/common/protocolbuffers/go v1.36.7-20250718021421-04f2daa29ad9.1 // indirect
+	connectrpc.com/connect v1.16.1 // indirect
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect

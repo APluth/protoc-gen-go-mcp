@@ -20,7 +20,6 @@ package longrunningpbconnect
 
 import (
 	longrunningpb "cloud.google.com/go/longrunning/autogen/longrunningpb"
-	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"

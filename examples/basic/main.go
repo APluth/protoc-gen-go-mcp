@@ -21,7 +21,6 @@ import (
 
 	"github.com/APluth/protoc-gen-go-mcp/pkg/runtime"
 	testdata "github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
-	"github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata/testdataconnect"
 	"github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata/testdatamcp"
 	"github.com/mark3labs/mcp-go/server"
 )
@@ -30,12 +29,6 @@ import (
 var (
 	grpcClient testdata.TestServiceClient
 	_          = testdatamcp.TestServiceClient(grpcClient)
-)
-
-// Ensure our interface and the official connect-go interface are compatible
-var (
-	connectClient testdataconnect.TestServiceClient
-	_             = testdatamcp.ConnectTestServiceClient(connectClient)
 )
 
 func main() {
@@ -72,7 +65,6 @@ func main() {
 	// testdatamcp.RegisterTestServiceHandler(s, &srv)
 	// testdatamcp.RegisterTestServiceHandlerOpenAI(s, &srv)
 
-	testdatamcp.ForwardToConnectTestServiceClient(s, connectClient)
 	testdatamcp.ForwardToTestServiceClient(s, grpcClient)
 
 	if err := server.ServeStdio(s); err != nil {

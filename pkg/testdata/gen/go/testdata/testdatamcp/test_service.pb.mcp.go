@@ -11,7 +11,6 @@ import (
 
 	"encoding/json"
 
-	"connectrpc.com/connect"
 	mcpserver "github.com/mark3labs/mcp-go/server"
 	"google.golang.org/protobuf/encoding/protojson"
 
@@ -254,111 +253,6 @@ type TestServiceClient interface {
 	CreateItem(ctx context.Context, req *testdata.CreateItemRequest, opts ...grpc.CallOption) (*testdata.CreateItemResponse, error)
 	GetItem(ctx context.Context, req *testdata.GetItemRequest, opts ...grpc.CallOption) (*testdata.GetItemResponse, error)
 	ProcessWellKnownTypes(ctx context.Context, req *testdata.ProcessWellKnownTypesRequest, opts ...grpc.CallOption) (*testdata.ProcessWellKnownTypesResponse, error)
-}
-
-// ConnectTestServiceClient is compatible with the connectrpc-go client interface.
-type ConnectTestServiceClient interface {
-	CreateItem(ctx context.Context, req *connect.Request[testdata.CreateItemRequest]) (*connect.Response[testdata.CreateItemResponse], error)
-	GetItem(ctx context.Context, req *connect.Request[testdata.GetItemRequest]) (*connect.Response[testdata.GetItemResponse], error)
-	ProcessWellKnownTypes(ctx context.Context, req *connect.Request[testdata.ProcessWellKnownTypesRequest]) (*connect.Response[testdata.ProcessWellKnownTypesResponse], error)
-}
-
-// ForwardToConnectTestServiceClient registers a connectrpc client, to forward MCP calls to it.
-func ForwardToConnectTestServiceClient(s *mcpserver.MCPServer, client ConnectTestServiceClient, opts ...runtime.Option) {
-	config := runtime.NewConfig()
-	for _, opt := range opts {
-		opt(config)
-	}
-	CreateItemTool := TestService_CreateItemTool
-	// Add extra properties to schema if configured
-	if len(config.ExtraProperties) > 0 {
-		CreateItemTool = runtime.AddExtraPropertiesToTool(CreateItemTool, config.ExtraProperties)
-	}
-
-	s.AddTool(CreateItemTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-		var req testdata.CreateItemRequest
-
-		message := request.Params.Arguments
-		marshaled, err := json.Marshal(message)
-		if err != nil {
-			return nil, err
-		}
-
-		if err := (protojson.UnmarshalOptions{DiscardUnknown: true}).Unmarshal(marshaled, &req); err != nil {
-			return nil, err
-		}
-
-		resp, err := client.CreateItem(ctx, connect.NewRequest(&req))
-		if err != nil {
-			return runtime.HandleError(err)
-		}
-
-		marshaled, err = (protojson.MarshalOptions{UseProtoNames: true, EmitDefaultValues: true}).Marshal(resp.Msg)
-		if err != nil {
-			return nil, err
-		}
-		return mcp.NewToolResultText(string(marshaled)), nil
-	})
-	GetItemTool := TestService_GetItemTool
-	// Add extra properties to schema if configured
-	if len(config.ExtraProperties) > 0 {
-		GetItemTool = runtime.AddExtraPropertiesToTool(GetItemTool, config.ExtraProperties)
-	}
-
-	s.AddTool(GetItemTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-		var req testdata.GetItemRequest
-
-		message := request.Params.Arguments
-		marshaled, err := json.Marshal(message)
-		if err != nil {
-			return nil, err
-		}
-
-		if err := (protojson.UnmarshalOptions{DiscardUnknown: true}).Unmarshal(marshaled, &req); err != nil {
-			return nil, err
-		}
-
-		resp, err := client.GetItem(ctx, connect.NewRequest(&req))
-		if err != nil {
-			return runtime.HandleError(err)
-		}
-
-		marshaled, err = (protojson.MarshalOptions{UseProtoNames: true, EmitDefaultValues: true}).Marshal(resp.Msg)
-		if err != nil {
-			return nil, err
-		}
-		return mcp.NewToolResultText(string(marshaled)), nil
-	})
-	ProcessWellKnownTypesTool := TestService_ProcessWellKnownTypesTool
-	// Add extra properties to schema if configured
-	if len(config.ExtraProperties) > 0 {
-		ProcessWellKnownTypesTool = runtime.AddExtraPropertiesToTool(ProcessWellKnownTypesTool, config.ExtraProperties)
-	}
-
-	s.AddTool(ProcessWellKnownTypesTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-		var req testdata.ProcessWellKnownTypesRequest
-
-		message := request.Params.Arguments
-		marshaled, err := json.Marshal(message)
-		if err != nil {
-			return nil, err
-		}
-
-		if err := (protojson.UnmarshalOptions{DiscardUnknown: true}).Unmarshal(marshaled, &req); err != nil {
-			return nil, err
-		}
-
-		resp, err := client.ProcessWellKnownTypes(ctx, connect.NewRequest(&req))
-		if err != nil {
-			return runtime.HandleError(err)
-		}
-
-		marshaled, err = (protojson.MarshalOptions{UseProtoNames: true, EmitDefaultValues: true}).Marshal(resp.Msg)
-		if err != nil {
-			return nil, err
-		}
-		return mcp.NewToolResultText(string(marshaled)), nil
-	})
 }
 
 // ForwardToTestServiceClient registers a gRPC client, to forward MCP calls to it.
