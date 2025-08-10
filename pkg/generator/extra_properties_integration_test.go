@@ -22,8 +22,8 @@ import (
 	"github.com/mark3labs/mcp-go/mcp"
 	mcpserver "github.com/mark3labs/mcp-go/server"
 	. "github.com/onsi/gomega"
-	"github.com/APluth/protoc-gen-go-mcp/pkg/runtime"
-	testdata "github.com/APluth/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
+	"github.com/redpanda-data/protoc-gen-go-mcp/pkg/runtime"
+	testdata "github.com/redpanda-data/protoc-gen-go-mcp/pkg/testdata/gen/go/testdata"
 )
 
 func TestExtraPropertiesSchemaModification(t *testing.T) {

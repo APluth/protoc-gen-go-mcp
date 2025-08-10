@@ -16,7 +16,7 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"connectrpc.com/connect"
 	grpc "google.golang.org/grpc"
-	"github.com/APluth/protoc-gen-go-mcp/pkg/runtime"
+	"github.com/redpanda-data/protoc-gen-go-mcp/pkg/runtime"
 )
 
 var (
