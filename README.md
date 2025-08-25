@@ -12,13 +12,35 @@ It generates `*.pb.mcp.go` files for each protobuf service, enabling you to dele
 
 ## ✨ Features
 
+- 🎯 **Selective generation** - Use `@mcp` comment tags to choose which RPC methods generate MCP endpoints
 - 🚀 Auto-generates MCP handlers from your `.proto` services  
 - 📦 Outputs JSON Schema for method inputs  
 - 🔄 Wire up to gRPC or ConnectRPC servers/clients  
 - 🧩 Easy integration with [`buf`](https://buf.build)  
-- 🎯 **Runtime LLM provider selection** - Choose between standard MCP and OpenAI-compatible schemas at runtime  
+- 🔄 **Runtime LLM provider selection** - Choose between standard MCP and OpenAI-compatible schemas at runtime  
 
 ## 🔧 Usage
+
+### Selective Generation with @mcp Tag
+
+**`protoc-gen-go-mcp` only generates MCP endpoints for RPC methods tagged with `@mcp` in their comments.** This gives you fine-grained control over which methods are exposed as MCP tools.
+
+```proto
+service UserService {
+  // @mcp
+  // CreateUser creates a new user account
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  
+  // GetUser retrieves user details (NOT generated - no @mcp tag)
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  
+  // @mcp Enable user deletion via MCP
+  // DeleteUser removes a user account
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+```
+
+In this example, only `CreateUser` and `DeleteUser` will have MCP endpoints generated, while `GetUser` will be skipped.
 
 ### Generate code
 

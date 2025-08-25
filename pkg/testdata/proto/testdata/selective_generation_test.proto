@@ -1,0 +1,66 @@
+// Copyright 2025 Redpanda Data, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//	http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package testdata;
+
+// SelectiveService tests the @mcp tag functionality
+service SelectiveService {
+  // @mcp
+  // EnabledMethod should generate MCP endpoints
+  rpc EnabledMethod(EnabledRequest) returns (EnabledResponse);
+  
+  // DisabledMethod should NOT generate MCP endpoints (no @mcp tag)
+  rpc DisabledMethod(DisabledRequest) returns (DisabledResponse);
+  
+  // @mcp Enable this endpoint for MCP
+  // AnotherEnabledMethod should generate MCP endpoints with additional description
+  rpc AnotherEnabledMethod(AnotherEnabledRequest) returns (AnotherEnabledResponse);
+  
+  // This method is also disabled (no @mcp tag)
+  rpc AnotherDisabledMethod(AnotherDisabledRequest) returns (AnotherDisabledResponse);
+}
+
+message EnabledRequest {
+  string input = 1;
+}
+
+message EnabledResponse {
+  string output = 1;
+}
+
+message DisabledRequest {
+  string input = 1;
+}
+
+message DisabledResponse {
+  string output = 1;
+}
+
+message AnotherEnabledRequest {
+  string input = 1;
+}
+
+message AnotherEnabledResponse {
+  string output = 1;
+}
+
+message AnotherDisabledRequest {
+  string input = 1;
+}
+
+message AnotherDisabledResponse {
+  string output = 1;
+}

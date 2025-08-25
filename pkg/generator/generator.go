@@ -628,7 +628,19 @@ func (g *FileGenerator) getType(fd protoreflect.FieldDescriptor) map[string]any 
 	return schema
 }
 
-var strippedCommentPrefixes = []string{"buf:lint:", "@ignore-comment"}
+var strippedCommentPrefixes = []string{"buf:lint:", "@ignore-comment", "@mcp"}
+
+// hasMCPTag checks if the comment contains the @mcp tag, indicating
+// that this method should have MCP endpoints generated
+func hasMCPTag(comment string) bool {
+	for _, line := range strings.Split(comment, "\n") {
+		trimmed := strings.TrimSpace(line)
+		if strings.HasPrefix(trimmed, "@mcp") {
+			return true
+		}
+	}
+	return false
+}
 
 func cleanComment(comment string) string {
 	var cleanedLines []string
@@ -718,6 +730,11 @@ func (g *FileGenerator) Generate(packageSuffix string) {
 		for _, meth := range svc.Methods {
 			// Only unary supported at the moment
 			if meth.Desc.IsStreamingClient() || meth.Desc.IsStreamingServer() {
+				continue
+			}
+
+			// Only generate MCP endpoints for methods with @mcp tag
+			if !hasMCPTag(string(meth.Comments.Leading)) {
 				continue
 			}
 
