@@ -1,4 +1,4 @@
-module github.com/redpanda-data/protoc-gen-go-mcp
+module github.com/APluth/protoc-gen-go-mcp
 
 go 1.23.5
 
@@ -8,6 +8,7 @@ require (
 	github.com/onsi/gomega v1.37.0
 	github.com/openai/openai-go v1.5.0
 	github.com/redpanda-data/common-go/api v0.0.0-20250801174835-9eea07f1ea06
+	github.com/redpanda-data/protoc-gen-go-mcp v0.0.0-20250812151819-7e5d5fef8241
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
 	google.golang.org/genproto/googleapis/api v0.0.0-20250218202821-56aae31c358a
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250212204824-5a70512c5d8b
